@@ -1,0 +1,35 @@
+name: CI Pipeline # First, it needs a normal readable name
+
+on: # What action in github should start this pipeline.
+  push: # Trigger on every 'push' event...
+    branches: ["main"] # ...but only for the 'main' branch.
+
+jobs: # A job is a collection of steps that run together.
+  build:
+    runs-on: ubuntu-latest # Specifies the type of virtual machine to use (Ubuntu latest version in this example).
+
+    # These are the actual instructions to be executed.
+    steps: # A sequence of operations to be performed in order.
+      - name: Checkout code # Each step has a name
+        uses:
+          actions/checkout@v5 # "uses" means "use a pre-made tool".
+          # This one is a standard tool provided by GitHub
+          # to copy your source code into the virtual machine.
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # Sets up the Node.js environment.
+        with:
+          node-version: "22" # Specifies which version of Node.js to use.
+
+      - name: Install dependencies
+        run: npm install # Runs the terminal command to download packages/libraries.
+
+      - name: Run tests
+        run: npm test # Runs the test script defined in package.json.
+
+
+# In Summary: What Happens?
+
+# When you push code to the main branch, GitHub starts a virtual computer,
+# pulls your code into it, installs Node.js, downloads your packages,
+# and finally runs your tests.
