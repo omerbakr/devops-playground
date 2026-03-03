@@ -1,0 +1,3 @@
+# We exclude node_modules to prevent copying large, OS-specific files from your local machine that might be incompatible with the container's Linux environment.
+# This ensures a smaller, faster image build where dependencies are installed fresh specifically for the container.
+node_modules/
